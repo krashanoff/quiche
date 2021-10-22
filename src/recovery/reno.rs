@@ -46,6 +46,7 @@ pub static RENO: CongestionControlOps = CongestionControlOps {
     checkpoint,
     rollback,
     has_custom_pacing,
+    debug_string,
 };
 
 pub fn on_packet_sent(r: &mut Recovery, sent_bytes: usize, _now: Instant) {
@@ -144,6 +145,10 @@ fn rollback(_r: &mut Recovery) -> bool {
 
 fn has_custom_pacing() -> bool {
     false
+}
+
+fn debug_string(_r: &Recovery) -> String {
+    "".to_string()
 }
 
 #[cfg(test)]

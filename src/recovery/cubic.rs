@@ -52,6 +52,7 @@ pub static CUBIC: CongestionControlOps = CongestionControlOps {
     checkpoint,
     rollback,
     has_custom_pacing,
+    debug_string,
 };
 
 /// CUBIC Constants.
@@ -431,6 +432,13 @@ fn rollback(r: &mut Recovery) -> bool {
 
 fn has_custom_pacing() -> bool {
     false
+}
+
+fn debug_string(r: &Recovery) -> String {
+    format!(
+        "cubic={{ k={} w_max={} max_bytes_in_flight={} }}",
+        r.cubic_state.k, r.cubic_state.w_max, r.cubic_state.max_bytes_in_flight,
+    )
 }
 
 #[cfg(test)]
